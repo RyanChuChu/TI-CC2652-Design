@@ -1,0 +1,51 @@
+Servo Motor psuedocode
+
+test table
+
+main:
+
+    InitPower()
+    InitClock()
+    InitGPIO()  ;set 1 output to PORT_EVENT for PWM output
+                ;set 1 input to Analog input (PORT_ID)
+    InitGPT()   ;1 PWM (50Hz, ILR = 960k)
+    InitADC()   ;Enable AUX_SYSIF:ADCCLKCTL
+
+    B Testloop
+
+Testloop:
+
+    load instructions from test table
+    load arguments
+
+    BL function
+
+    B Testloop
+
+# Functions
+
+Procedure: SetServo
+
+    matchR = 72k + 48k * angle / 90
+
+Procedure: ReleaseServo
+
+    matchR = 0
+
+Procedure: GetServo
+
+    AUX_ANAIF:ADCCTL.START_SRC to NO_EVENT to manually trigger the ADC
+    (already reset)
+
+    set AUX_ANAIF:ADCTRIG.START to 1
+
+    wait AUX_ANAIF:ADCFIFOSTAT.EMPTY not 1
+    Read AUX_ANAIF:ADC_FIFO.DATA
+
+    ;find the range of data for [-90, 90]
+    linear mapping from data to angle
+
+    return angle
+
+
+

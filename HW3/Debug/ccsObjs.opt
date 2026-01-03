@@ -1,0 +1,10 @@
+"./LCD.o"
+"./syscfg/ti_devices_config.o"
+"./syscfg/ti_drivers_config.o"
+"./init.o"
+"./main.o"
+"./utils.o"
+"./utils_bf.o"
+"../cc13x2_cc26x2_nortos.cmd"
+-lti_utils_build_linker.cmd.genlibs
+-llibc.a

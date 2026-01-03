@@ -1,0 +1,37 @@
+[
+   {
+      "directory" : "/Users/ryan/workspace_ccstheia/HW5/Debug",
+      "command"   : "clang++ -I\"/Users/ryan/workspace_ccstheia/HW5\" -I\"/Users/ryan/workspace_ccstheia/HW5/Debug\" -I\"/Users/ryan/ti/simplelink_cc13xx_cc26xx_sdk_8_31_00_11/source\" -I\"/Users/ryan/ti/simplelink_cc13xx_cc26xx_sdk_8_31_00_11/kernel/nortos\" -I\"/Users/ryan/ti/simplelink_cc13xx_cc26xx_sdk_8_31_00_11/kernel/nortos/posix\" -isystem\"/Applications/ti/ccs2030/ccs/tools/compiler/ti-cgt-armllvm_4.0.3.LTS/include/armv7em-ti-none-eabihf/c++/v1\" -isystem\"/Applications/ti/ccs2030/ccs/tools/compiler/ti-cgt-armllvm_4.0.3.LTS/include/c++/v1\" -isystem\"/Applications/ti/ccs2030/ccs/tools/compiler/ti-cgt-armllvm_4.0.3.LTS/lib/clang/18/include\" -isystem\"/Applications/ti/ccs2030/ccs/tools/compiler/ti-cgt-armllvm_4.0.3.LTS/include/c\" -I\"/Users/ryan/workspace_ccstheia/HW5/Debug/syscfg\" -DDeviceFamily_CC26X2",
+      "file"      : "/Users/ryan/workspace_ccstheia/HW5/main.s"
+   },
+   {
+      "directory" : "/Users/ryan/workspace_ccstheia/HW5/Debug",
+      "command"   : "clang++ -I\"/Users/ryan/workspace_ccstheia/HW5\" -I\"/Users/ryan/workspace_ccstheia/HW5/Debug\" -I\"/Users/ryan/ti/simplelink_cc13xx_cc26xx_sdk_8_31_00_11/source\" -I\"/Users/ryan/ti/simplelink_cc13xx_cc26xx_sdk_8_31_00_11/kernel/nortos\" -I\"/Users/ryan/ti/simplelink_cc13xx_cc26xx_sdk_8_31_00_11/kernel/nortos/posix\" -isystem\"/Applications/ti/ccs2030/ccs/tools/compiler/ti-cgt-armllvm_4.0.3.LTS/include/armv7em-ti-none-eabihf/c++/v1\" -isystem\"/Applications/ti/ccs2030/ccs/tools/compiler/ti-cgt-armllvm_4.0.3.LTS/include/c++/v1\" -isystem\"/Applications/ti/ccs2030/ccs/tools/compiler/ti-cgt-armllvm_4.0.3.LTS/lib/clang/18/include\" -isystem\"/Applications/ti/ccs2030/ccs/tools/compiler/ti-cgt-armllvm_4.0.3.LTS/include/c\" -I\"/Users/ryan/workspace_ccstheia/HW5/Debug/syscfg\" -DDeviceFamily_CC26X2",
+      "file"      : "/Users/ryan/workspace_ccstheia/HW5/init.s"
+   },
+   {
+      "directory" : "/Users/ryan/workspace_ccstheia/HW5/Debug",
+      "command"   : "clang++ -I\"/Users/ryan/workspace_ccstheia/HW5\" -I\"/Users/ryan/workspace_ccstheia/HW5/Debug\" -I\"/Users/ryan/ti/simplelink_cc13xx_cc26xx_sdk_8_31_00_11/source\" -I\"/Users/ryan/ti/simplelink_cc13xx_cc26xx_sdk_8_31_00_11/kernel/nortos\" -I\"/Users/ryan/ti/simplelink_cc13xx_cc26xx_sdk_8_31_00_11/kernel/nortos/posix\" -isystem\"/Applications/ti/ccs2030/ccs/tools/compiler/ti-cgt-armllvm_4.0.3.LTS/include/armv7em-ti-none-eabihf/c++/v1\" -isystem\"/Applications/ti/ccs2030/ccs/tools/compiler/ti-cgt-armllvm_4.0.3.LTS/include/c++/v1\" -isystem\"/Applications/ti/ccs2030/ccs/tools/compiler/ti-cgt-armllvm_4.0.3.LTS/lib/clang/18/include\" -isystem\"/Applications/ti/ccs2030/ccs/tools/compiler/ti-cgt-armllvm_4.0.3.LTS/include/c\" -I\"/Users/ryan/workspace_ccstheia/HW5/Debug/syscfg\" -DDeviceFamily_CC26X2",
+      "file"      : "/Users/ryan/workspace_ccstheia/HW5/LCD.s"
+   },
+   {
+      "directory" : "/Users/ryan/workspace_ccstheia/HW5/Debug",
+      "command"   : "clang++ -I\"/Users/ryan/workspace_ccstheia/HW5\" -I\"/Users/ryan/workspace_ccstheia/HW5/Debug\" -I\"/Users/ryan/ti/simplelink_cc13xx_cc26xx_sdk_8_31_00_11/source\" -I\"/Users/ryan/ti/simplelink_cc13xx_cc26xx_sdk_8_31_00_11/kernel/nortos\" -I\"/Users/ryan/ti/simplelink_cc13xx_cc26xx_sdk_8_31_00_11/kernel/nortos/posix\" -isystem\"/Applications/ti/ccs2030/ccs/tools/compiler/ti-cgt-armllvm_4.0.3.LTS/include/armv7em-ti-none-eabihf/c++/v1\" -isystem\"/Applications/ti/ccs2030/ccs/tools/compiler/ti-cgt-armllvm_4.0.3.LTS/include/c++/v1\" -isystem\"/Applications/ti/ccs2030/ccs/tools/compiler/ti-cgt-armllvm_4.0.3.LTS/lib/clang/18/include\" -isystem\"/Applications/ti/ccs2030/ccs/tools/compiler/ti-cgt-armllvm_4.0.3.LTS/include/c\" -I\"/Users/ryan/workspace_ccstheia/HW5/Debug/syscfg\" -DDeviceFamily_CC26X2",
+      "file"      : "/Users/ryan/workspace_ccstheia/HW5/utils.s"
+   },
+   {
+      "directory" : "/Users/ryan/workspace_ccstheia/HW5/Debug",
+      "command"   : "clang++ -I\"/Users/ryan/workspace_ccstheia/HW5\" -I\"/Users/ryan/workspace_ccstheia/HW5/Debug\" -I\"/Users/ryan/ti/simplelink_cc13xx_cc26xx_sdk_8_31_00_11/source\" -I\"/Users/ryan/ti/simplelink_cc13xx_cc26xx_sdk_8_31_00_11/kernel/nortos\" -I\"/Users/ryan/ti/simplelink_cc13xx_cc26xx_sdk_8_31_00_11/kernel/nortos/posix\" -isystem\"/Applications/ti/ccs2030/ccs/tools/compiler/ti-cgt-armllvm_4.0.3.LTS/include/armv7em-ti-none-eabihf/c++/v1\" -isystem\"/Applications/ti/ccs2030/ccs/tools/compiler/ti-cgt-armllvm_4.0.3.LTS/include/c++/v1\" -isystem\"/Applications/ti/ccs2030/ccs/tools/compiler/ti-cgt-armllvm_4.0.3.LTS/lib/clang/18/include\" -isystem\"/Applications/ti/ccs2030/ccs/tools/compiler/ti-cgt-armllvm_4.0.3.LTS/include/c\" -I\"/Users/ryan/workspace_ccstheia/HW5/Debug/syscfg\" -DDeviceFamily_CC26X2",
+      "file"      : "/Users/ryan/workspace_ccstheia/HW5/servo.s"
+   },
+   {
+      "directory" : "/Users/ryan/workspace_ccstheia/HW5/Debug",
+      "command"   : "clang++ -I\"/Users/ryan/workspace_ccstheia/HW5\" -I\"/Users/ryan/workspace_ccstheia/HW5/Debug\" -I\"/Users/ryan/ti/simplelink_cc13xx_cc26xx_sdk_8_31_00_11/source\" -I\"/Users/ryan/ti/simplelink_cc13xx_cc26xx_sdk_8_31_00_11/kernel/nortos\" -I\"/Users/ryan/ti/simplelink_cc13xx_cc26xx_sdk_8_31_00_11/kernel/nortos/posix\" -isystem\"/Applications/ti/ccs2030/ccs/tools/compiler/ti-cgt-armllvm_4.0.3.LTS/include/armv7em-ti-none-eabihf/c++/v1\" -isystem\"/Applications/ti/ccs2030/ccs/tools/compiler/ti-cgt-armllvm_4.0.3.LTS/include/c++/v1\" -isystem\"/Applications/ti/ccs2030/ccs/tools/compiler/ti-cgt-armllvm_4.0.3.LTS/lib/clang/18/include\" -isystem\"/Applications/ti/ccs2030/ccs/tools/compiler/ti-cgt-armllvm_4.0.3.LTS/include/c\" -I\"/Users/ryan/workspace_ccstheia/HW5/Debug/syscfg\" -DDeviceFamily_CC26X2 -xc",
+      "file"      : "/Users/ryan/workspace_ccstheia/HW5/Debug/syscfg/ti_devices_config.c"
+   },
+   {
+      "directory" : "/Users/ryan/workspace_ccstheia/HW5/Debug",
+      "command"   : "clang++ -I\"/Users/ryan/workspace_ccstheia/HW5\" -I\"/Users/ryan/workspace_ccstheia/HW5/Debug\" -I\"/Users/ryan/ti/simplelink_cc13xx_cc26xx_sdk_8_31_00_11/source\" -I\"/Users/ryan/ti/simplelink_cc13xx_cc26xx_sdk_8_31_00_11/kernel/nortos\" -I\"/Users/ryan/ti/simplelink_cc13xx_cc26xx_sdk_8_31_00_11/kernel/nortos/posix\" -isystem\"/Applications/ti/ccs2030/ccs/tools/compiler/ti-cgt-armllvm_4.0.3.LTS/include/armv7em-ti-none-eabihf/c++/v1\" -isystem\"/Applications/ti/ccs2030/ccs/tools/compiler/ti-cgt-armllvm_4.0.3.LTS/include/c++/v1\" -isystem\"/Applications/ti/ccs2030/ccs/tools/compiler/ti-cgt-armllvm_4.0.3.LTS/lib/clang/18/include\" -isystem\"/Applications/ti/ccs2030/ccs/tools/compiler/ti-cgt-armllvm_4.0.3.LTS/include/c\" -I\"/Users/ryan/workspace_ccstheia/HW5/Debug/syscfg\" -DDeviceFamily_CC26X2 -xc",
+      "file"      : "/Users/ryan/workspace_ccstheia/HW5/Debug/syscfg/ti_drivers_config.c"
+   }
+]

@@ -1,0 +1,66 @@
+Keypad Interface
+pseudocode
+
+TopOfStack:     .bes     TOTAL_STACK_SIZE
+QueueHead:      .space   QueueSize * BYTES_PER_WORD
+
+resetISR:
+
+main:
+    initialize stack pointers
+
+    InitPower()
+    InitClocks()
+    MoveVecTable()
+    InitGPIO()
+
+
+Initialization
+
+Procedure:        InitPower
+
+Description:      Turn on the power to the peripherals.
+
+Arguments:        None.
+Return Values:    None.
+
+Shared Variables: None.
+
+Input:            None.
+Output:           None.
+
+Error Handling:   None.
+
+Algorithms:       None.
+Data Structures:  None.
+
+get base address of PRCM
+write enable to peripheral PDCTL
+wait for power on
+
+RETURN
+
+Procedure:        InitClocks
+
+Description:      Turn on the clock to the peripherals. 
+
+Arguments:        None.
+Return Values:    None.
+
+Shared Variables: None.
+
+Input:            None.
+Output:           None.
+
+Error Handling:   None.
+
+Algorithms:       None.
+Data Structures:  None.
+
+get base address of PRCM
+turn on GPIO clock
+turn on GPT0 clock
+use CLKLOADCTL to load PRCM settings to CLKCTRL power domain
+wait for clocks to be turned on
+
+RETURN

@@ -1,0 +1,104 @@
+Stepper Motor psuedocode
+
+Variable:
+CurrentPos
+TargetPos (Queue)
+
+truth table for PWM, have A, A_bar, B, B_bar
+
+test table
+
+main:
+
+    InitPower()
+    InitClock()
+    MoveVecTable()
+    InitGPIO()  ;need to set output to PORT_EVENT0 for PWM output
+    InstallGPT0EventHandler()
+    InitGPT();  1 20Hz, 1 A (PWM, 255), 1 B (PWM, 0)
+
+    Initialize CurrentPos and TargetPos to 0
+
+    Enable interrupt
+
+    SetStepperHome()
+
+    B Testloop
+
+Testloop:
+
+    load instructions from test table
+    load arguments
+
+    BL function
+
+    B Testloop
+
+# EventHandler
+Procedure: EventHandler
+
+    Get CurrentPos, TargetPos
+    let diff = TargetPos - CurrentPos
+    let sign = sign (diff) ;0 for clockwise, 1 for counter clockwise
+    
+
+    if diff > 18    ;full step
+        if sign = 0
+            loop all table clockwise
+            CurrentPos += 18
+        else 
+            loop all table clockwise
+            CurrentPos -= 18
+    else if diff > 12
+        if sign = 0
+            loop 8 commands clockwise
+            CurrentPos += 12
+        else 
+            loop 8 commands clockwise
+            CurrentPos -= 12
+    else 
+        if sign = 0
+            loop 4 commands clockwise
+            CurrentPos += 6
+        else 
+            loop 4 commands clockwise
+            CurrentPos -= 6
+
+    Set TargetPos = CurrentPos
+    if < 0 then all += 360
+    if > 360 then all -= 360
+
+    clear interrupt
+
+    BX LR
+
+# Functions
+
+Procedure: SetAngle
+
+    store angle to TargetPos
+
+Procedure: SetRelAngle
+
+    load CurrentPos
+    total = CurrentPos + Angle
+    SetAngle(total)
+
+Procedure: Homestepper
+
+    SetAngle(0)
+
+Procedure: SetStepperHome
+
+    store CurrentPos = 0
+    store TargetPos = 0
+    (need to disable interrupt)
+
+Procedure: GetAngle
+
+    load CurrentPos
+    if CurrentPos > 0
+        return angle to R0
+    else
+        return 360 + CurrentPos to R0
+

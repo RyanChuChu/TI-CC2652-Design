@@ -1,0 +1,37 @@
+[
+   {
+      "directory" : "/Users/ryan/workspace_ccstheia/HW4/Debug",
+      "command"   : "clang++ -I\"/Users/ryan/workspace_ccstheia/HW4\" -I\"/Users/ryan/workspace_ccstheia/HW4/Debug\" -I\"/Users/ryan/ti/simplelink_cc13xx_cc26xx_sdk_8_31_00_11/source\" -I\"/Users/ryan/ti/simplelink_cc13xx_cc26xx_sdk_8_31_00_11/kernel/nortos\" -I\"/Users/ryan/ti/simplelink_cc13xx_cc26xx_sdk_8_31_00_11/kernel/nortos/posix\" -isystem\"/Applications/ti/ccs2030/ccs/tools/compiler/ti-cgt-armllvm_4.0.3.LTS/include/armv7em-ti-none-eabihf/c++/v1\" -isystem\"/Applications/ti/ccs2030/ccs/tools/compiler/ti-cgt-armllvm_4.0.3.LTS/include/c++/v1\" -isystem\"/Applications/ti/ccs2030/ccs/tools/compiler/ti-cgt-armllvm_4.0.3.LTS/lib/clang/18/include\" -isystem\"/Applications/ti/ccs2030/ccs/tools/compiler/ti-cgt-armllvm_4.0.3.LTS/include/c\" -I\"/Users/ryan/workspace_ccstheia/HW4/Debug/syscfg\"",
+      "file"      : "/Users/ryan/workspace_ccstheia/HW4/init.s"
+   },
+   {
+      "directory" : "/Users/ryan/workspace_ccstheia/HW4/Debug",
+      "command"   : "clang++ -I\"/Users/ryan/workspace_ccstheia/HW4\" -I\"/Users/ryan/workspace_ccstheia/HW4/Debug\" -I\"/Users/ryan/ti/simplelink_cc13xx_cc26xx_sdk_8_31_00_11/source\" -I\"/Users/ryan/ti/simplelink_cc13xx_cc26xx_sdk_8_31_00_11/kernel/nortos\" -I\"/Users/ryan/ti/simplelink_cc13xx_cc26xx_sdk_8_31_00_11/kernel/nortos/posix\" -isystem\"/Applications/ti/ccs2030/ccs/tools/compiler/ti-cgt-armllvm_4.0.3.LTS/include/armv7em-ti-none-eabihf/c++/v1\" -isystem\"/Applications/ti/ccs2030/ccs/tools/compiler/ti-cgt-armllvm_4.0.3.LTS/include/c++/v1\" -isystem\"/Applications/ti/ccs2030/ccs/tools/compiler/ti-cgt-armllvm_4.0.3.LTS/lib/clang/18/include\" -isystem\"/Applications/ti/ccs2030/ccs/tools/compiler/ti-cgt-armllvm_4.0.3.LTS/include/c\" -I\"/Users/ryan/workspace_ccstheia/HW4/Debug/syscfg\"",
+      "file"      : "/Users/ryan/workspace_ccstheia/HW4/stepper_event.s"
+   },
+   {
+      "directory" : "/Users/ryan/workspace_ccstheia/HW4/Debug",
+      "command"   : "clang++ -I\"/Users/ryan/workspace_ccstheia/HW4\" -I\"/Users/ryan/workspace_ccstheia/HW4/Debug\" -I\"/Users/ryan/ti/simplelink_cc13xx_cc26xx_sdk_8_31_00_11/source\" -I\"/Users/ryan/ti/simplelink_cc13xx_cc26xx_sdk_8_31_00_11/kernel/nortos\" -I\"/Users/ryan/ti/simplelink_cc13xx_cc26xx_sdk_8_31_00_11/kernel/nortos/posix\" -isystem\"/Applications/ti/ccs2030/ccs/tools/compiler/ti-cgt-armllvm_4.0.3.LTS/include/armv7em-ti-none-eabihf/c++/v1\" -isystem\"/Applications/ti/ccs2030/ccs/tools/compiler/ti-cgt-armllvm_4.0.3.LTS/include/c++/v1\" -isystem\"/Applications/ti/ccs2030/ccs/tools/compiler/ti-cgt-armllvm_4.0.3.LTS/lib/clang/18/include\" -isystem\"/Applications/ti/ccs2030/ccs/tools/compiler/ti-cgt-armllvm_4.0.3.LTS/include/c\" -I\"/Users/ryan/workspace_ccstheia/HW4/Debug/syscfg\"",
+      "file"      : "/Users/ryan/workspace_ccstheia/HW4/stepper.s"
+   },
+   {
+      "directory" : "/Users/ryan/workspace_ccstheia/HW4/Debug",
+      "command"   : "clang++ -I\"/Users/ryan/workspace_ccstheia/HW4\" -I\"/Users/ryan/workspace_ccstheia/HW4/Debug\" -I\"/Users/ryan/ti/simplelink_cc13xx_cc26xx_sdk_8_31_00_11/source\" -I\"/Users/ryan/ti/simplelink_cc13xx_cc26xx_sdk_8_31_00_11/kernel/nortos\" -I\"/Users/ryan/ti/simplelink_cc13xx_cc26xx_sdk_8_31_00_11/kernel/nortos/posix\" -isystem\"/Applications/ti/ccs2030/ccs/tools/compiler/ti-cgt-armllvm_4.0.3.LTS/include/armv7em-ti-none-eabihf/c++/v1\" -isystem\"/Applications/ti/ccs2030/ccs/tools/compiler/ti-cgt-armllvm_4.0.3.LTS/include/c++/v1\" -isystem\"/Applications/ti/ccs2030/ccs/tools/compiler/ti-cgt-armllvm_4.0.3.LTS/lib/clang/18/include\" -isystem\"/Applications/ti/ccs2030/ccs/tools/compiler/ti-cgt-armllvm_4.0.3.LTS/include/c\" -I\"/Users/ryan/workspace_ccstheia/HW4/Debug/syscfg\"",
+      "file"      : "/Users/ryan/workspace_ccstheia/HW4/LCD.s"
+   },
+   {
+      "directory" : "/Users/ryan/workspace_ccstheia/HW4/Debug",
+      "command"   : "clang++ -I\"/Users/ryan/workspace_ccstheia/HW4\" -I\"/Users/ryan/workspace_ccstheia/HW4/Debug\" -I\"/Users/ryan/ti/simplelink_cc13xx_cc26xx_sdk_8_31_00_11/source\" -I\"/Users/ryan/ti/simplelink_cc13xx_cc26xx_sdk_8_31_00_11/kernel/nortos\" -I\"/Users/ryan/ti/simplelink_cc13xx_cc26xx_sdk_8_31_00_11/kernel/nortos/posix\" -isystem\"/Applications/ti/ccs2030/ccs/tools/compiler/ti-cgt-armllvm_4.0.3.LTS/include/armv7em-ti-none-eabihf/c++/v1\" -isystem\"/Applications/ti/ccs2030/ccs/tools/compiler/ti-cgt-armllvm_4.0.3.LTS/include/c++/v1\" -isystem\"/Applications/ti/ccs2030/ccs/tools/compiler/ti-cgt-armllvm_4.0.3.LTS/lib/clang/18/include\" -isystem\"/Applications/ti/ccs2030/ccs/tools/compiler/ti-cgt-armllvm_4.0.3.LTS/include/c\" -I\"/Users/ryan/workspace_ccstheia/HW4/Debug/syscfg\"",
+      "file"      : "/Users/ryan/workspace_ccstheia/HW4/utils_bf.s"
+   },
+   {
+      "directory" : "/Users/ryan/workspace_ccstheia/HW4/Debug",
+      "command"   : "clang++ -I\"/Users/ryan/workspace_ccstheia/HW4\" -I\"/Users/ryan/workspace_ccstheia/HW4/Debug\" -I\"/Users/ryan/ti/simplelink_cc13xx_cc26xx_sdk_8_31_00_11/source\" -I\"/Users/ryan/ti/simplelink_cc13xx_cc26xx_sdk_8_31_00_11/kernel/nortos\" -I\"/Users/ryan/ti/simplelink_cc13xx_cc26xx_sdk_8_31_00_11/kernel/nortos/posix\" -isystem\"/Applications/ti/ccs2030/ccs/tools/compiler/ti-cgt-armllvm_4.0.3.LTS/include/armv7em-ti-none-eabihf/c++/v1\" -isystem\"/Applications/ti/ccs2030/ccs/tools/compiler/ti-cgt-armllvm_4.0.3.LTS/include/c++/v1\" -isystem\"/Applications/ti/ccs2030/ccs/tools/compiler/ti-cgt-armllvm_4.0.3.LTS/lib/clang/18/include\" -isystem\"/Applications/ti/ccs2030/ccs/tools/compiler/ti-cgt-armllvm_4.0.3.LTS/include/c\" -I\"/Users/ryan/workspace_ccstheia/HW4/Debug/syscfg\"",
+      "file"      : "/Users/ryan/workspace_ccstheia/HW4/utils.s"
+   },
+   {
+      "directory" : "/Users/ryan/workspace_ccstheia/HW4/Debug",
+      "command"   : "clang++ -I\"/Users/ryan/workspace_ccstheia/HW4\" -I\"/Users/ryan/workspace_ccstheia/HW4/Debug\" -I\"/Users/ryan/ti/simplelink_cc13xx_cc26xx_sdk_8_31_00_11/source\" -I\"/Users/ryan/ti/simplelink_cc13xx_cc26xx_sdk_8_31_00_11/kernel/nortos\" -I\"/Users/ryan/ti/simplelink_cc13xx_cc26xx_sdk_8_31_00_11/kernel/nortos/posix\" -isystem\"/Applications/ti/ccs2030/ccs/tools/compiler/ti-cgt-armllvm_4.0.3.LTS/include/armv7em-ti-none-eabihf/c++/v1\" -isystem\"/Applications/ti/ccs2030/ccs/tools/compiler/ti-cgt-armllvm_4.0.3.LTS/include/c++/v1\" -isystem\"/Applications/ti/ccs2030/ccs/tools/compiler/ti-cgt-armllvm_4.0.3.LTS/lib/clang/18/include\" -isystem\"/Applications/ti/ccs2030/ccs/tools/compiler/ti-cgt-armllvm_4.0.3.LTS/include/c\" -I\"/Users/ryan/workspace_ccstheia/HW4/Debug/syscfg\"",
+      "file"      : "/Users/ryan/workspace_ccstheia/HW4/main.s"
+   }
+]

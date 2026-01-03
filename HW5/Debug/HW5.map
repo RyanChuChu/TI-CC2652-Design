@@ -1,0 +1,265 @@
+******************************************************************************
+            TI ARM Clang Linker Unix v4.0.3                    
+******************************************************************************
+>> Linked Fri Dec 12 15:21:14 2025
+
+OUTPUT FILE NAME:   <HW5.out>
+ENTRY POINT SYMBOL: "resetISR"  address: 0000062f
+
+
+MEMORY CONFIGURATION
+
+         name            origin    length      used     unused   attr    fill
+----------------------  --------  ---------  --------  --------  ----  --------
+  FLASH                 00000000   00058000  00000861  0005779f  R  X
+  GPRAM                 11000000   00002000  00000000  00002000  RW X
+  SRAM                  20000000   00014000  00004190  0000fe70  RW X
+  LOG_DATA              90000000   00040000  00000000  00040000  R   
+  LOG_PTR               94000008   00040000  00000000  00040000  R   
+
+
+SEGMENT ALLOCATION MAP
+
+run origin  load origin   length   init length attrs members
+----------  ----------- ---------- ----------- ----- -------
+00000000    00000000    000007e5   000007e5    r-x
+  00000000    00000000    00000784   00000784    r-x .text
+  00000784    00000784    00000061   00000061    r-- .const
+000007e8    000007e8    00000008   00000008    rw-
+  000007e8    000007e8    00000008   00000008    rw- .args
+000007f0    000007f0    0000001c   0000001c    r--
+  000007f0    000007f0    0000001c   0000001c    r-- .cinit
+00057fa8    00057fa8    00000058   00000058    r--
+  00057fa8    00057fa8    00000058   00000058    r-- .ccfg
+20000000    20000000    00004190   00000000    rw-
+  20000000    20000000    00004000   00000000    rw- .sysmem
+  20004000    20004000    00000190   00000000    rw- .data
+
+
+SECTION ALLOCATION MAP
+
+ output                                  attributes/
+section   page    origin      length       input sections
+--------  ----  ----------  ----------   ----------------
+.text      0    00000000    00000784     
+                  00000000    000001de     LCD.o (.text)
+                  000001de    0000017a     servo.o (.text)
+                  00000358    00000176     utils.o (.text)
+                  000004ce    00000160     init.o (.text)
+                  0000062e    000000be     main.o (.text)
+                  000006ec    00000074     libc.a : copy_decompress_lzss.c.obj (.text:decompress:lzss)
+                  00000760    00000012            : memcpy_t2.S.obj (.text:TI_memcpy_small)
+                  00000772    0000000e            : copy_decompress_none.c.obj (.text:decompress:none)
+                  00000780    00000004     libclang_rt.builtins.a : aeabi_memcpy.S.obj (.text.__aeabi_memcpy)
+
+.const     0    00000784    00000061     
+                  00000784    00000061     main.o (.const)
+
+.binit     0    00000000    00000000     
+
+.cinit     0    000007f0    0000001c     
+                  000007f0    00000009     (.cinit..data.load) [load image, compression = lzss]
+                  000007f9    00000003     --HOLE-- [fill = 0]
+                  000007fc    00000008     (__TI_handler_table)
+                  00000804    00000008     (__TI_cinit_table)
+
+.init_array 
+*          0    00000000    00000000     UNINITIALIZED
+
+.ccfg      0    00057fa8    00000058     
+                  00057fa8    00000058     ti_devices_config.o (.ccfg)
+
+.data      0    20004000    00000190     UNINITIALIZED
+                  20004000    00000180     main.o (.data)
+                  20004180    0000000c     LCD.o (.data)
+                  2000418c    00000004     servo.o (.data)
+
+.sysmem    0    20000000    00004000     UNINITIALIZED
+                  20000000    00000010     libc.a : memory.c.obj (.sysmem)
+                  20000010    00003ff0     --HOLE--
+
+.log_data 
+*          0    90000000    00000000     COPY SECTION
+
+.log_ptr   0    94000008    00000000     COPY SECTION
+
+__llvm_prf_cnts 
+*          0    20000000    00000000     UNINITIALIZED
+
+__llvm_prf_bits 
+*          0    20000000    00000000     UNINITIALIZED
+
+.args      0    000007e8    00000008     
+                  000007e8    00000008     --HOLE-- [fill = 0]
+
+MODULE SUMMARY
+
+       Module                       code   ro data   rw data
+       ------                       ----   -------   -------
+    ./
+       main.o                       190    97        384    
+       LCD.o                        478    0         12     
+       servo.o                      378    0         4      
+       utils.o                      374    0         0      
+       init.o                       352    0         0      
+    +--+----------------------------+------+---------+---------+
+       Total:                       1772   97        400    
+                                                            
+    ./syscfg/
+       ti_devices_config.o          0      88        0      
+    +--+----------------------------+------+---------+---------+
+       Total:                       0      88        0      
+                                                            
+    /Applications/ti/ccs2030/ccs/tools/compiler/ti-cgt-armllvm_4.0.3.LTS/lib/armv7em-ti-none-eabihf/c/libc.a
+       copy_decompress_lzss.c.obj   116    0         0      
+       memcpy_t2.S.obj              18     0         0      
+       copy_decompress_none.c.obj   14     0         0      
+    +--+----------------------------+------+---------+---------+
+       Total:                       148    0         0      
+                                                            
+    /Applications/ti/ccs2030/ccs/tools/compiler/ti-cgt-armllvm_4.0.3.LTS/lib/armv7em-ti-none-eabihf/libclang_rt.builtins.a
+       aeabi_memcpy.S.obj           4      0         0      
+    +--+----------------------------+------+---------+---------+
+       Total:                       4      0         0      
+                                                            
+       Heap:                        0      0         16384  
+       Linker Generated:            0      25        0      
+    +--+----------------------------+------+---------+---------+
+       Grand Total:                 1924   210       16784  
+
+
+LINKER GENERATED COPY TABLES
+
+__TI_cinit_table @ 00000804 records: 1, size/record: 8, table size: 8
+	.data: load addr=000007f0, load size=00000009 bytes, run addr=20004000, run size=00000190 bytes, compression=lzss
+
+
+LINKER GENERATED HANDLER TABLE
+
+__TI_handler_table @ 000007fc records: 2, size/record: 4, table size: 8
+	index: 0, handler: __TI_decompress_lzss
+	index: 1, handler: __TI_decompress_none
+
+
+GLOBAL SYMBOLS: SORTED ALPHABETICALLY BY Name 
+
+address   name                    
+-------   ----                    
+20004188  CallInvalid             
+000003a7  CheckPos                
+0000019b  ClearDisplay            
+20004184  CursorCol               
+20004180  CursorRow               
+00000125  Display                 
+00000083  DisplayChar             
+00000289  GetServo                
+000005a9  InitADC                 
+000004ef  InitClocks              
+0000052b  InitGPIO                
+00000577  InitGPT                 
+00000001  InitLCD                 
+000004cf  InitPower               
+000001df  InitServoGPT            
+000001d6  InvalidString           
+0000033b  ReleaseServo            
+0000022f  SetServo                
+00000761  TI_memcpy_small         
+0000040f  WaitLCDReady            
+00000455  WriteLCD                
+00004000  __SYSMEM_SIZE           
+00000000  __TI_ATRegion0_region_sz
+00000000  __TI_ATRegion0_src_addr 
+00000000  __TI_ATRegion0_trg_addr 
+00000000  __TI_ATRegion1_region_sz
+00000000  __TI_ATRegion1_src_addr 
+00000000  __TI_ATRegion1_trg_addr 
+00000000  __TI_ATRegion2_region_sz
+00000000  __TI_ATRegion2_src_addr 
+00000000  __TI_ATRegion2_trg_addr 
+00000804  __TI_CINIT_Base         
+0000080c  __TI_CINIT_Limit        
+0000080c  __TI_CINIT_Warm         
+000007fc  __TI_Handler_Table_Base 
+00000804  __TI_Handler_Table_Limit
+000006ed  __TI_decompress_lzss    
+00000773  __TI_decompress_none    
+ffffffff  __TI_pprof_out_hndl     
+ffffffff  __TI_prof_data_size     
+ffffffff  __TI_prof_data_start    
+00000000  __TI_static_base__      
+00000781  __aeabi_memcpy          
+00000781  __aeabi_memcpy4         
+00000781  __aeabi_memcpy8         
+ffffffff  __binit__               
+000007e8  __c_args__              
+00057fa8  __ccfg                  
+20000000  __start___llvm_prf_bits 
+20000000  __start___llvm_prf_cnts 
+20000000  __stop___llvm_prf_bits  
+20000000  __stop___llvm_prf_cnts  
+20000000  _sys_memory             
+ffffffff  binit                   
+0000062f  resetISR                
+
+
+GLOBAL SYMBOLS: SORTED BY Symbol Address 
+
+address   name                    
+-------   ----                    
+00000000  __TI_ATRegion0_region_sz
+00000000  __TI_ATRegion0_src_addr 
+00000000  __TI_ATRegion0_trg_addr 
+00000000  __TI_ATRegion1_region_sz
+00000000  __TI_ATRegion1_src_addr 
+00000000  __TI_ATRegion1_trg_addr 
+00000000  __TI_ATRegion2_region_sz
+00000000  __TI_ATRegion2_src_addr 
+00000000  __TI_ATRegion2_trg_addr 
+00000000  __TI_static_base__      
+00000001  InitLCD                 
+00000083  DisplayChar             
+00000125  Display                 
+0000019b  ClearDisplay            
+000001d6  InvalidString           
+000001df  InitServoGPT            
+0000022f  SetServo                
+00000289  GetServo                
+0000033b  ReleaseServo            
+000003a7  CheckPos                
+0000040f  WaitLCDReady            
+00000455  WriteLCD                
+000004cf  InitPower               
+000004ef  InitClocks              
+0000052b  InitGPIO                
+00000577  InitGPT                 
+000005a9  InitADC                 
+0000062f  resetISR                
+000006ed  __TI_decompress_lzss    
+00000761  TI_memcpy_small         
+00000773  __TI_decompress_none    
+00000781  __aeabi_memcpy          
+00000781  __aeabi_memcpy4         
+00000781  __aeabi_memcpy8         
+000007e8  __c_args__              
+000007fc  __TI_Handler_Table_Base 
+00000804  __TI_CINIT_Base         
+00000804  __TI_Handler_Table_Limit
+0000080c  __TI_CINIT_Limit        
+0000080c  __TI_CINIT_Warm         
+00004000  __SYSMEM_SIZE           
+00057fa8  __ccfg                  
+20000000  __start___llvm_prf_bits 
+20000000  __start___llvm_prf_cnts 
+20000000  __stop___llvm_prf_bits  
+20000000  __stop___llvm_prf_cnts  
+20000000  _sys_memory             
+20004180  CursorRow               
+20004184  CursorCol               
+20004188  CallInvalid             
+ffffffff  __TI_pprof_out_hndl     
+ffffffff  __TI_prof_data_size     
+ffffffff  __TI_prof_data_start    
+ffffffff  __binit__               
+ffffffff  binit                   
+
+[55 symbols]

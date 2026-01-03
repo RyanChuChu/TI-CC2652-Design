@@ -1,0 +1,50 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "HW1",
+            "type": "ccs-debug",
+            "request": "launch",
+            "projectInfo": {
+                "name": "HW1",
+                "resourceId": "/HW1"
+            }
+        },
+        {
+            "name": "HW2",
+            "type": "ccs-debug",
+            "request": "launch",
+            "projectInfo": {
+                "name": "HW2",
+                "resourceId": "/HW2"
+            }
+        },
+        {
+            "name": "HW4",
+            "type": "ccs-debug",
+            "request": "launch",
+            "projectInfo": {
+                "name": "HW4",
+                "resourceId": "/HW4"
+            }
+        },
+        {
+            "name": "HW3",
+            "type": "ccs-debug",
+            "request": "launch",
+            "projectInfo": {
+                "name": "HW3",
+                "resourceId": "/HW3"
+            }
+        },
+        {
+            "name": "HW5",
+            "type": "ccs-debug",
+            "request": "launch",
+            "projectInfo": {
+                "name": "HW5",
+                "resourceId": "/HW5"
+            }
+        }
+    ]
+}

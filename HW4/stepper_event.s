@@ -1,0 +1,235 @@
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;                                                                            ;
+;                                    HW4                                     ;
+;                    Stepper Motor Interface Event Handler                   ;
+;                                                                            ;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+; This file contains the stepper motor event handler of timer interrupts for 
+; every 20ms. In every interrupt, the event handler computes the difference of
+; current and target motor angle. Then, it decides whether to turn and which
+; direction to turn the stepper motor. Finally, it loads the corresponding 
+; value in PWM cycle and adjust the duty cycle for each timer on each output
+; pins, and update the current motor angle.
+;
+; Revision History:
+;       12/02/25     Li-Yu Chu             inital revision
+;       12/03/25     Li-Yu Chu             update comments
+
+
+; local include files
+        .include  "CPUreg.inc"
+        .include  "GPIOreg.inc"
+        .include  "IOCreg.inc"
+        .include  "GPTreg.inc"
+        .include  "constant.inc"
+        .include  "macro.inc"
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+; data
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+        .data
+        ;position tracking variables
+        .global CurrentPos              ;the current angle stepper motor is pointing to
+        .global TargetPos               ;the expected angle stepper motor is going to
+
+        ;stepper motor event handler
+        .def    GPT1EventHandler        ;main routine event handler
+        
+        ;stepper motor PWM table and pointer
+        .ref    PWMStepperTab           ;start of PWM table
+        .ref    EndPWMStepperTab        ;end of PWM table
+        .ref    PWMPointer              ;the pointer in PWM table
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;
+; code
+;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+        .text
+
+; GPT1EventHandler
+;
+; Description:       This procedure is the event handler for the main routine
+;                    invoked by GPT1 every 20ms. It calculates the difference
+;                    between the current and target position, determines the
+;                    rotation direction, loads four table-driven PWM values  
+;                    into timers GPT2 and GPT3, updates PWMPointer, and 
+;                    increments/decrements CurrentPos by 6°. Notice that a full 
+;                    step for the stepper motor is 18°, so we adjust the duty 
+;                    cycle by multiplying cos30° and sin30° to perform 3 
+;                    microstepping (90°/3 = 30°, a full step in current space
+;                    is 90°, so for 1 microstep is 30°), and the resolution for
+;                    1 microstep is 6°.
+;
+; Operation:         The function first loads CurrentPos and TargetPos, and 
+;                    computes diff = TargetPos – CurrentPos. If diff >= 0, the  
+;                    function enters clockwise turning logic, and vice versa.
+;                    In clockwise turning logic, it first determines if the 
+;                    difference is big enough that the motor should move one 
+;                    step, and the threshold is half of the angle resolution 3°.
+;                    (for example, if difference is 4°, then the stepper motor
+;                    should move one step so the difference will become 2°)
+;                    If turning is needed, the function will load next PWM duty
+;                    cycle into GPT2 and GPT3 by adjusting MATCHR, which performs
+;                    a microstep. Then, the CurrentPos is incremented by 6°, and
+;                    PWMPointer is also adjusted. For the counterclockwise part,
+;                    it performs similar operation except the previous duty cycle 
+;                    is loaded. Finally, the adjusted CurrentPos is stored and
+;                    the interrupt is cleared.
+;
+; Arguments:         None.
+; Return Value:      None.
+;
+; Local Variables:   None.
+; Shared Variables:  None.
+; Global Variables:  CurrentPos  -  the actual current motor angle
+;                                   (initialized in main loop, updated during 
+;                                   movement to target position)
+;                    TargetPos   -  the desired angle the motor should rotate to    
+;                                   (initialized in main loop, not updated here)
+;                    PWMPointer  -  the pointer in PWM table
+;                                   (initialized in main loop, updated here if
+;                                   a microstep is performed)
+;
+; Input:             None.
+; Output:            DIO22, 21   -  the PWM output generated by GPT2A and GPT2B
+;                    DIO 5,  4   -  the PWM output generated by GPT3A and GPT3B
+;
+; Error Handling:    None.
+;
+; Algorithms:        This function utilizes the sign of the difference between 
+;                    current and target motor angle to determine the turning
+;                    direction. (positive → clockwise, negative → couterclockwise)
+;                    Also, to minimize the execution time for turning logic, we 
+;                    utilize table-driven PWM microstepping, with duty cycle 
+;                    computed in advance and stored in PWM table. The loading order
+;                    of PWM values determines the turning direction. (downward → 
+;                    clockwise, upward → couterclockwise)                   
+; 
+; Data Structures:   None.
+;
+; Registers Changed: None.
+; Stack Depth:       5 words
+;
+; Known Bugs:        None.
+; Limitation:        The event handler requires a predefined PWM table and a pointer
+;                    on the PWM table.
+;
+; Revision History:  
+;        12/02/25   Li-Yu Chu      initial revision
+
+
+GPT1EventHandler:
+
+        PUSH    {R4 - R8}                       ;save the registers
+
+        MOVA    R1, CurrentPos                  ;load current position
+        LDR     R2, [R1]
+
+        MOVA    R1, TargetPos                   ;load target position
+        LDR     R3, [R1]        
+
+        SUBS    R4, R3, R2                      ;check the difference between target 
+                                                ;and current position
+        BMI     CounterClockwiseTurn            ;if negative, do counterclockwise rotation                    
+        ;BPL    ClockwiseTurn                   ;if positive, do clockwise rotation
+
+ClockwiseTurn:
+
+        CMP     R4, #ANGLE_HALFRES              ;check if the difference is larger than 
+                                                ;half of minimum degree resolution
+        BLE     ClearInterrupt                  ;if smaller, no need to make turns
+        ;BGT    StartClockwiseTurn              ;otherwise, it needs to make a turn to 
+                                                ;make a closer approach
+
+StartClockwiseTurn:
+        
+        MOVA    R1, PWMPointer                  ;load current PWM pointer
+        LDR     R1, [R1]
+
+        ADD     R1, #BYTE_PER_ENTRY             ;move to next PWM table entry
+        MOVA    R0, EndPWMStepperTab            ;check if pointer reached end of PWM table
+        CMP     R1, R0
+        BNE     LoadValues                      ;if no, directly load PWM table entry
+        ;BEQ    SetPointerTop                   ;if yes, move PWMPointer to top of the table
+
+SetPointerTop:
+        
+        MOVA    R1, PWMStepperTab               ;wrap pointer to top of the table
+        ;B      LoadValues                      ;start loading PWM table entry
+        
+LoadValues:
+
+        LDM     R1, {R5, R6, R7, R8}            ;load 4 PWM values from PWM table
+        MOV32   R0, GPT2_BASE_ADDR              ;get base address of GPT2 timers
+        STR     R5, [R0, #GPT_TAMATCHR_OFF]     ;store duty cycle for GPT2A
+        STR     R6, [R0, #GPT_TBMATCHR_OFF]     ;store duty cycle for GPT2B
+
+        MOV32   R0, GPT3_BASE_ADDR              ;get base address of GPT3 timers
+        STR     R7, [R0, #GPT_TAMATCHR_OFF]     ;store duty cycle for GPT3A
+        STR     R8, [R0, #GPT_TBMATCHR_OFF]     ;store duty cycle for GPT3B
+
+        ADD     R2, #ANGLE_RES                  ;increment CurrentPos by 6°
+
+        B       SetPointerUsual                 ;update R1 PWMPointer       
+
+CounterClockwiseTurn:
+
+        SUB     R4, R2, R3                      ;reverse the order to get positive value.
+        CMP     R4, #ANGLE_HALFRES              ;check if the difference is larger than 
+                                                ;half of minimum degree resolution
+        BLE     ClearInterrupt                  ;if smaller, no need to make turns
+        ;BGT    StartCounterClockwiseTurn       ;otherwise, it needs to make a turn to 
+                                                ;make a closer approach
+
+StartCounterlockwiseTurn:
+        
+        MOVA    R1, PWMPointer                  ;load current PWM pointer
+        LDR     R1, [R1]
+
+        LDMDB   R1!, {R5, R6, R7, R8}
+        MOV32   R0, GPT2_BASE_ADDR              ;get base address of GPT2 timers
+        STR     R5, [R0, #GPT_TAMATCHR_OFF]     ;store duty cycle for GPT2A
+        STR     R6, [R0, #GPT_TBMATCHR_OFF]     ;store duty cycle for GPT2B
+
+        MOV32   R0, GPT3_BASE_ADDR              ;get base address of GPT3 timers
+        STR     R7, [R0, #GPT_TAMATCHR_OFF]     ;store duty cycle for GPT3A
+        STR     R8, [R0, #GPT_TBMATCHR_OFF]     ;store duty cycle for GPT3B
+
+        SUB     R2, #ANGLE_RES                  ;decrement CurrentPos by 6°
+
+        MOVA    R0, PWMStepperTab               ;check if pointer reached top of PWM table
+        CMP     R1, R0
+        BNE     SetPointerUsual                 ;if no, R1 is the updated PWMPointer
+        ;BEQ    SetPointerEnd                   ;if yes, move PWMPointer to end of the table
+
+SetPointerEnd:
+        
+        MOVA    R1, EndPWMStepperTab            ;wrap pointer to end of the table
+        ;B      SetPointerUsual                 ;need to store it back to PWMPointer
+
+SetPointerUsual:
+
+        MOVA    R0, PWMPointer                  ;stored updated pointer back to PWMPointer
+        STR     R1, [R0]
+        ;B      ClearInterrupt
+
+ClearInterrupt:                                 ;done with interrupt
+        
+        MOVA    R1, CurrentPos                  ;store current position
+        STR     R2, [R1]
+
+        MOV32   R1, GPT1_BASE_ADDR              ;get base address of GPT1
+        STREG   GPT_IRQ_TATO, R1, GPT_ICLR_OFF  ;clear GPT1A timeout interrupt
+
+        POP     {R4 - R8}                       ;restore registers
+
+        BX      LR                              ;return from interrupt
+
+        .end

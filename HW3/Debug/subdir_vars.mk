@@ -1,0 +1,101 @@
+################################################################################
+# Automatically-generated file. Do not edit!
+################################################################################
+
+# Add inputs and outputs from these tool invocations to the build variables 
+CMD_SRCS += \
+../cc13x2_cc26x2_nortos.cmd 
+
+SYSCFG_SRCS += \
+../empty.syscfg 
+
+S_SRCS += \
+../LCD.s \
+../init.s \
+../main.s \
+../utils.s \
+../utils_bf.s 
+
+C_SRCS += \
+./syscfg/ti_devices_config.c \
+./syscfg/ti_drivers_config.c 
+
+S_DEPS += \
+./LCD.d \
+./init.d \
+./main.d \
+./utils.d \
+./utils_bf.d 
+
+GEN_FILES += \
+./syscfg/ti_devices_config.c \
+./syscfg/ti_drivers_config.c \
+./syscfg/ti_utils_build_compiler.opt 
+
+GEN_MISC_DIRS += \
+./syscfg 
+
+C_DEPS += \
+./syscfg/ti_devices_config.d \
+./syscfg/ti_drivers_config.d 
+
+GEN_OPTS += \
+./syscfg/ti_utils_build_compiler.opt 
+
+OBJS += \
+./LCD.o \
+./syscfg/ti_devices_config.o \
+./syscfg/ti_drivers_config.o \
+./init.o \
+./main.o \
+./utils.o \
+./utils_bf.o 
+
+GEN_MISC_FILES += \
+./syscfg/ti_drivers_config.h \
+./syscfg/ti_utils_build_linker.cmd.genlibs \
+./syscfg/ti_utils_build_linker.cmd.genmap \
+./syscfg/syscfg_c.rov.xs 
+
+GEN_MISC_DIRS__QUOTED += \
+"syscfg" 
+
+OBJS__QUOTED += \
+"LCD.o" \
+"syscfg/ti_devices_config.o" \
+"syscfg/ti_drivers_config.o" \
+"init.o" \
+"main.o" \
+"utils.o" \
+"utils_bf.o" 
+
+GEN_MISC_FILES__QUOTED += \
+"syscfg/ti_drivers_config.h" \
+"syscfg/ti_utils_build_linker.cmd.genlibs" \
+"syscfg/ti_utils_build_linker.cmd.genmap" \
+"syscfg/syscfg_c.rov.xs" 
+
+C_DEPS__QUOTED += \
+"syscfg/ti_devices_config.d" \
+"syscfg/ti_drivers_config.d" 
+
+GEN_FILES__QUOTED += \
+"syscfg/ti_devices_config.c" \
+"syscfg/ti_drivers_config.c" \
+"syscfg/ti_utils_build_compiler.opt" 
+
+S_DEPS__QUOTED += \
+"LCD.d" \
+"init.d" \
+"main.d" \
+"utils.d" \
+"utils_bf.d" 
+
+SYSCFG_SRCS__QUOTED += \
+"../empty.syscfg" 
+
+C_SRCS__QUOTED += \
+"./syscfg/ti_devices_config.c" \
+"./syscfg/ti_drivers_config.c" 
+
+

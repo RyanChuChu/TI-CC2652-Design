@@ -1,0 +1,226 @@
+******************************************************************************
+            TI ARM Clang Linker Unix v4.0.3                    
+******************************************************************************
+>> Linked Fri Dec 12 00:32:34 2025
+
+OUTPUT FILE NAME:   <HW2.out>
+ENTRY POINT SYMBOL: "resetISR"  address: 00000001
+
+
+MEMORY CONFIGURATION
+
+         name            origin    length      used     unused   attr    fill
+----------------------  --------  ---------  --------  --------  ----  --------
+  FLASH                 00000000   00058000  00000164  00057e9c  R  X
+  GPRAM                 11000000   00002000  00000000  00002000  RW X
+  SRAM                  20000000   00014000  000046c0  0000f940  RW X
+  LOG_DATA              90000000   00040000  00000000  00040000  R   
+  LOG_PTR               94000008   00040000  00000000  00040000  R   
+
+
+SEGMENT ALLOCATION MAP
+
+run origin  load origin   length   init length attrs members
+----------  ----------- ---------- ----------- ----- -------
+00000000    00000000    00000104   00000104    r-x
+  00000000    00000000    00000104   00000104    r-x .text
+00000104    00000104    00000008   00000008    rw-
+  00000104    00000104    00000008   00000008    rw- .args
+00057fa8    00057fa8    00000058   00000058    r--
+  00057fa8    00057fa8    00000058   00000058    r-- .ccfg
+20000000    20000000    00004000   00000000    rw-
+  20000000    20000000    00004000   00000000    rw- .sysmem
+20004000    20004000    000006c0   000006c0    rwx
+  20004000    20004000    000006c0   000006c0    rwx .data
+
+
+SECTION ALLOCATION MAP
+
+ output                                  attributes/
+section   page    origin      length       input sections
+--------  ----  ----------  ----------   ----------------
+.text      0    00000000    00000104     
+                  00000000    000000d4     main.o (.text)
+                  000000d4    00000008     init.o (.tramp.InitGPT0.1)
+                  000000dc    00000008     init.o (.tramp.InstallGPT0Handler.1)
+                  000000e4    00000008     init.o (.tramp.InitGPIO.1)
+                  000000ec    00000008     init.o (.tramp.MoveVecTable.1)
+                  000000f4    00000008     init.o (.tramp.InitClocks.1)
+                  000000fc    00000008     init.o (.tramp.InitPower.1)
+
+.binit     0    00000000    00000000     
+
+.cinit     0    00000000    00000000     
+
+.init_array 
+*          0    00000000    00000000     UNINITIALIZED
+
+.ccfg      0    00057fa8    00000058     
+                  00057fa8    00000058     ti_devices_config.o (.ccfg)
+
+.data      0    20004000    000006c0     
+                  20004000    0000047c     main.o (.data)
+                  2000447c    00000120     init.o (.data)
+                  2000459c    0000011a     keypad.o (.data)
+                  200046b6    00000002     --HOLE-- [fill = 0]
+                  200046b8    00000008     main.o (.tramp.Enqueue.1)
+
+.sysmem    0    20000000    00004000     UNINITIALIZED
+                  20000000    00000010     libc.a : memory.c.obj (.sysmem)
+                  20000010    00003ff0     --HOLE--
+
+.log_data 
+*          0    90000000    00000000     COPY SECTION
+
+.log_ptr   0    94000008    00000000     COPY SECTION
+
+__llvm_prf_cnts 
+*          0    20000000    00000000     UNINITIALIZED
+
+__llvm_prf_bits 
+*          0    20000000    00000000     UNINITIALIZED
+
+.args      0    00000104    00000008     
+                  00000104    00000008     --HOLE-- [fill = 0]
+
+MODULE SUMMARY
+
+       Module                code   ro data   rw data
+       ------                ----   -------   -------
+    ./
+       main.o                220    0         1148   
+       init.o                336    0         0      
+       keypad.o              282    0         0      
+    +--+---------------------+------+---------+---------+
+       Total:                838    0         1148   
+                                                     
+    ./syscfg/
+       ti_devices_config.o   0      88        0      
+    +--+---------------------+------+---------+---------+
+       Total:                0      88        0      
+                                                     
+       Heap:                 0      0         16384  
+    +--+---------------------+------+---------+---------+
+       Grand Total:          838    88        17532  
+
+
+FAR CALL TRAMPOLINES
+
+callee name               trampoline name
+   callee addr  tramp addr   call addr  call info
+--------------  -----------  ---------  ----------------
+InitGPT0                  $Tramp$TT$L$PI$$InitGPT0
+   20004561     000000d4     0000007e   main.o (.text)
+InstallGPT0Handler        $Tramp$TT$L$PI$$InstallGPT0Handler
+   20004549     000000dc     0000007a   main.o (.text)
+InitGPIO                  $Tramp$TT$L$PI$$InitGPIO
+   2000450f     000000e4     00000020   main.o (.text)
+MoveVecTable              $Tramp$TT$L$PI$$MoveVecTable
+   200044d9     000000ec     0000001c   main.o (.text)
+InitClocks                $Tramp$TT$L$PI$$InitClocks
+   2000449d     000000f4     00000018   main.o (.text)
+InitPower                 $Tramp$TT$L$PI$$InitPower
+   2000447d     000000fc     00000014   main.o (.text)
+Enqueue                   $Tramp$TT$L$PI$$Enqueue
+   0000009b     200046b8     20004678   keypad.o (.data)
+
+[7 trampolines]
+[7 trampoline calls]
+
+
+GLOBAL SYMBOLS: SORTED ALPHABETICALLY BY Name 
+
+address   name                    
+-------   ----                    
+20004470  CurRow                  
+20004478  DebounceCntr            
+0000009b  Enqueue                 
+2000459d  GPT0EventHandler        
+2000449d  InitClocks              
+2000450f  InitGPIO                
+20004561  InitGPT0                
+2000447d  InitPower               
+20004549  InstallGPT0Handler      
+200044d9  MoveVecTable            
+20004474  PrevPosPattern          
+200042d8  QueueHead               
+2000446c  QueueTail               
+20004468  QueueWrite              
+20004200  VecTable                
+00004000  __SYSMEM_SIZE           
+00000000  __TI_ATRegion0_region_sz
+00000000  __TI_ATRegion0_src_addr 
+00000000  __TI_ATRegion0_trg_addr 
+00000000  __TI_ATRegion1_region_sz
+00000000  __TI_ATRegion1_src_addr 
+00000000  __TI_ATRegion1_trg_addr 
+00000000  __TI_ATRegion2_region_sz
+00000000  __TI_ATRegion2_src_addr 
+00000000  __TI_ATRegion2_trg_addr 
+00000000  __TI_CINIT_Base         
+00000000  __TI_CINIT_Limit        
+00000000  __TI_CINIT_Warm         
+ffffffff  __TI_pprof_out_hndl     
+ffffffff  __TI_prof_data_size     
+ffffffff  __TI_prof_data_start    
+00000000  __TI_static_base__      
+ffffffff  __binit__               
+00000104  __c_args__              
+00057fa8  __ccfg                  
+20000000  __start___llvm_prf_bits 
+20000000  __start___llvm_prf_cnts 
+20000000  __stop___llvm_prf_bits  
+20000000  __stop___llvm_prf_cnts  
+20000000  _sys_memory             
+ffffffff  binit                   
+00000001  resetISR                
+
+
+GLOBAL SYMBOLS: SORTED BY Symbol Address 
+
+address   name                    
+-------   ----                    
+00000000  __TI_ATRegion0_region_sz
+00000000  __TI_ATRegion0_src_addr 
+00000000  __TI_ATRegion0_trg_addr 
+00000000  __TI_ATRegion1_region_sz
+00000000  __TI_ATRegion1_src_addr 
+00000000  __TI_ATRegion1_trg_addr 
+00000000  __TI_ATRegion2_region_sz
+00000000  __TI_ATRegion2_src_addr 
+00000000  __TI_ATRegion2_trg_addr 
+00000000  __TI_CINIT_Base         
+00000000  __TI_CINIT_Limit        
+00000000  __TI_CINIT_Warm         
+00000000  __TI_static_base__      
+00000001  resetISR                
+0000009b  Enqueue                 
+00000104  __c_args__              
+00004000  __SYSMEM_SIZE           
+00057fa8  __ccfg                  
+20000000  __start___llvm_prf_bits 
+20000000  __start___llvm_prf_cnts 
+20000000  __stop___llvm_prf_bits  
+20000000  __stop___llvm_prf_cnts  
+20000000  _sys_memory             
+20004200  VecTable                
+200042d8  QueueHead               
+20004468  QueueWrite              
+2000446c  QueueTail               
+20004470  CurRow                  
+20004474  PrevPosPattern          
+20004478  DebounceCntr            
+2000447d  InitPower               
+2000449d  InitClocks              
+200044d9  MoveVecTable            
+2000450f  InitGPIO                
+20004549  InstallGPT0Handler      
+20004561  InitGPT0                
+2000459d  GPT0EventHandler        
+ffffffff  __TI_pprof_out_hndl     
+ffffffff  __TI_prof_data_size     
+ffffffff  __TI_prof_data_start    
+ffffffff  __binit__               
+ffffffff  binit                   
+
+[42 symbols]
