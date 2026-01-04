@@ -35,7 +35,11 @@ Mapping of the CC2652 GPIO pins to external peripherals:
 
 ## 📂 Project Structure
 * `HW*/`: Main assembly source files (`.s`) and include files
--  HW1: LED blinking
+   -  HW1: On-board LED blinking
+   -  HW2: 4x4 keypad scanning & debouncing
+   -  HW3: LCD string & character displaying
+   -  HW4: Stepper motor microstepping
+   -  HW5: Servomotor positioning and feedback
 
 ## 🚀 Key Features implemented in Assembly
 1.  **GPIO Control:** Direct memory access to toggle LEDs and read Keypad matrix states.
