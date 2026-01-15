@@ -32,12 +32,18 @@ Procedure: InitIMU
     addr = 0x75
     data = ReadIMU(addr)
     if data != 0x71:
-        B InitIMU
-    else:
-        addr = 0x25 (I2C_SLV0_ADDR)
-        WriteSSI(addr)
-        data = 0x8C (Read, physical addr of AK8963 magnetometer is 0x0C)
-        BX LR
+        B InitIMU (report error)
+    
+    addr = 0x25 (I2C_SLV0_ADDR)
+    WriteSSI(addr)
+    data = 0x8C (Read, physical addr of AK8963 magnetometer is 0x0C)
+    WriteSSI(data)
+    addr = 0x27 (I2C_SLV0_CTRL)
+    WriteSSI(addr)
+    data = 0x81 (Enable I2C, read 1 byte every time)
+    WriteSSI(data)
+    
+    BX LR
         
 
 Procedure: GetAccel
@@ -86,44 +92,48 @@ Procedure: GetMagnet
     return (data1 << 8 || data2)
 
 
-Procedure: ReadIMU
+Procedure: ReadIMU(addr)
 
     addr is passed in R1
     WriteSSI(addr)
-    R0 = ReadSSI()
+
     R0 = ReadSSI()
     
     BX LR
 
-Procedure: ReadIMUMag
+Procedure: ReadIMUMag(mag_addr)
 
     addr = 0x26 (I2C_SLV0_REG)
     WriteSSI(addr)
-    data = addr passed in R1
+    data = mag_addr passed in R1
     WriteSSI(data)
-    addr = 0x27 (I2C_SLV0_CTRL)
-    WriteSSI(addr)
-    data = 0x81 (Enable I2C, read 1 byte every time)
-    WriteSSI(data)
+
+    out_addr = 0x48 (EXT_SENS_DATA_00)
+    WriteSSI(out_addr)
     
-    R0 = ReadSSI()
     R0 = ReadSSI()
     
     BX LR
 
-Procedure: WriteSSI
+Procedure: WriteSSI(data)
 
-    Check SSI0.SR (off = 0xC) is 0x3 (empty)
-    if not, wait until empty
+    Check SSI0.SR (off = 0xC) BSY is 0
+    if not, wait until not busy
     store data in SSI0.DR (off = 0x8)
+    Check SSI0.SR (off = 0xC) BSY is 0
+    if not, wait until not busy
+    remove the wrong data in RxFIFO
 
     BX LR
     
 
-Procedure: ReadSSI
+Procedure: ReadSSI()
 
-    Check SSI0.SR (off = 0xC) is 0x7 (Rx FIFO not empty)
-    if empty, wait until not
+    Check SSI0.SR (off = 0xC) BSY is 0
+    if not, wait until not busy
+    put dummy data in TxFIFO
+    Check SSI0.SR (off = 0xC) BSY is 0
+    if not, wait until not busy
     load data in SSI0.DR (off = 0x8)
 
-    BX LR
+    return data
