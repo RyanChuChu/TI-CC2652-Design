@@ -1,0 +1,129 @@
+IMU pseudocode
+
+main:
+
+    InitPower() ;also turn on serial
+    InitClock() ;also turn on SSI0 CLK (SSICLKGR off = 0x78)
+    InitGPIO()  ;DIO2: SDO (input, SSI0_Rx, port_ID: 0x9)
+                ;DIO24: nCS (output, SSI0_FSS, port_ID: 0xB)
+                ;DIO25: SDI (output, SSI0_Tx, port_ID: 0xA)
+                ;DIO26: SCLK (output, SSI0_CLK, port_ID: 0xC)
+    InitGPT()   ;GPT0 for LCD
+
+    InitLCD()
+
+    InitSSI()   
+
+    InitIMU()   
+
+    testing functions
+
+Procedure: InitSSI
+
+    get base address of SSI0 = 0x40000000
+    set CR0 (off = 0) = 0x00001767 (SCR = 23, SPH = 1, SPO = 1, DSS = 8-bit)
+    set CPSR (off = 0x10) CPSDVSR (last 8 bits) to 0x02
+    set CR1 (off = 4) SSE (bit 1) to enable
+
+    BX LR
+    
+Procedure: InitIMU
+
+    addr = 0x75
+    data = ReadIMU(addr)
+    if data != 0x71:
+        B InitIMU
+    else:
+        addr = 0x25 (I2C_SLV0_ADDR)
+        WriteSSI(addr)
+        data = 0x8C (Read, physical addr of AK8963 magnetometer is 0x0C)
+        BX LR
+        
+
+Procedure: GetAccel
+    if axis == 0:
+        addr1 = 0x3B (ACCEL_XOUT_H)
+        addr2 = 0x3C (ACCEL_XOUT_L)
+    if axis == 1:
+        addr1 = 0x3D (ACCEL_YOUT_H)
+        addr2 = 0x3E (ACCEL_YOUT_L)
+    if axis == 2:
+        addr1 = 0x3F (ACCEL_ZOUT_H)
+        addr2 = 0x40 (ACCEL_ZOUT_L)
+    
+    data1 = ReadIMU(addr1)
+    data2 = ReadIMU(addr2)
+    return (data1 << 8 || data2)
+
+Procedure: GetGyro
+    if axis == 0:
+        addr1 = 0x43 (GYRO_XOUT_H)
+        addr2 = 0x44 (GYRO_XOUT_L)
+    if axis == 1:
+        addr1 = 0x45 (GYRO_YOUT_H)
+        addr2 = 0x46 (GYRO_YOUT_L)
+    if axis == 2:
+        addr1 = 0x47 (GYRO_ZOUT_H)
+        addr2 = 0x48 (GYRO_ZOUT_L)
+    
+    data1 = ReadIMU(addr1)
+    data2 = ReadIMU(addr2)
+    return (data1 << 8 || data2)
+
+Procedure: GetMagnet
+    if axis == 0:
+        addr1 = 0x04 (HXH)
+        addr2 = 0x03 (HXL)
+    if axis == 1:
+        addr1 = 0x06 (HYH)
+        addr2 = 0x05 (HYL)
+    if axis == 2:
+        addr1 = 0x08 (HZH)
+        addr2 = 0x07 (HZL)   
+    
+    data1 = ReadIMUMag(addr1)
+    data2 = ReadIMUMag(addr2)
+    return (data1 << 8 || data2)
+
+
+Procedure: ReadIMU
+
+    addr is passed in R1
+    WriteSSI(addr)
+    R0 = ReadSSI()
+    R0 = ReadSSI()
+    
+    BX LR
+
+Procedure: ReadIMUMag
+
+    addr = 0x26 (I2C_SLV0_REG)
+    WriteSSI(addr)
+    data = addr passed in R1
+    WriteSSI(data)
+    addr = 0x27 (I2C_SLV0_CTRL)
+    WriteSSI(addr)
+    data = 0x81 (Enable I2C, read 1 byte every time)
+    WriteSSI(data)
+    
+    R0 = ReadSSI()
+    R0 = ReadSSI()
+    
+    BX LR
+
+Procedure: WriteSSI
+
+    Check SSI0.SR (off = 0xC) is 0x3 (empty)
+    if not, wait until empty
+    store data in SSI0.DR (off = 0x8)
+
+    BX LR
+    
+
+Procedure: ReadSSI
+
+    Check SSI0.SR (off = 0xC) is 0x7 (Rx FIFO not empty)
+    if empty, wait until not
+    load data in SSI0.DR (off = 0x8)
+
+    BX LR
